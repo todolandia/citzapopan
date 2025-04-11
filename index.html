@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CITZapopan - Centro de Innovación Tecnológica</title>
+  
+  <!-- Favicon (icono del navegador) -->
+  <link rel="icon" href="" type="image/ico">
+  <link rel="icon" href="file:///C:/Users/02/Documents/citz/corporativo/icono.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <style>
+
+     :root {
+      --primary: #6a1b9a;
+      --secondary: #8e24aa;
+      --accent: #ffab00;
+      --light: #f5f7fa;
+      --dark: #333;
+      --gray: #e0e0e0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: var(--light);
+      transform: skewY(-2deg);
+      z-index: 1;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    header p {
+      margin: 1rem 0 0;
+      font-size: 1.5rem;
+      position: relative;
+      z-index: 2;
+      opacity: 0.9;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--secondary);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      margin: 0 0.5rem;
+      flex: 1;
+      text-align: center;
+      min-width: 120px;
+    }
+    
+    nav a:hover, nav a.active {
+      background-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    section {
+      padding: 4rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--primary);
+      font-size: 2rem;
+      position: relative;
+    }
+    
+    section h2::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+    
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .card h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+    
+    .card .icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--gray);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .testimonials {
+      background-color: rgba(106, 27, 154, 0.05);
+      padding: 3rem 1rem;
+      margin: 3rem 0;
+      border-radius: 10px;
+    }
+    
+    footer {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      margin-top: 0;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-3px);
+      color: var(--accent);
+    }
+    
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 3rem 1rem;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        min-width: auto;
+        flex: auto;
+      }
+      
+      section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>CITZapopan</h1>
+  <p>Centro de Innovación Tecnológica de Zapopan</p>
+</header>
+
+
+<nav>
+  <a href="#inicio" class="active"><i class="fas fa-home"></i> Inicio</a>
+  <a href="#cursos"><i class="fas fa-graduation-cap"></i> Cursos</a>
+  <a href="#escuelas"><i class="fas fa-school"></i> Escuelas</a>
+  <a href="#catalogo"><i class="fas fa-robot"></i> Catálogo</a>
+  <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+</nav>
+
+<section id="inicio" class="fade-in">
+  <h2>Bienvenido a CITZapopan</h2>
+  <div class="card">
+    <p>Enseñamos robótica, programación y electrónica a niños y jóvenes de 8 a 18 años. Nuestro método de enseñanza combina:</p>
+    <ul>
+      <li>Kits tecnológicos físicos que enviamos a tu domicilio</li>
+      <li>Plataforma interactiva con videojuegos educativos</li>
+      <li>Sesiones en vivo con expertos en tecnología</li>
+      <li>Proyectos prácticos para desarrollar habilidades reales</li>
+    </ul>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="#cursos" class="btn">Ver nuestros cursos</a>
+    </div>
+  </div>
+</section>
+
+<section id="cursos" class="fade-in delay-1">
+  <h2>Nuestros Cursos</h2>
+  <div class="card-container">
+    <div class="card">
+      <div class="icon"><i class="fas fa-baby"></i></div>
+      <h3>Principiantes (8-12 años)</h3>
+      <p>Introducción a la programación con Scratch, robótica básica, lógica computacional y pensamiento algorítmico.</p>
+      <ul>
+        <li>Duración: 3 meses</li>
+        <li>Sesiones: 2 por semana</li>
+        <li>Incluye kit de inicio</li>
+      </ul>
+      <a href="#reservacion" class="btn btn-outline">Más información</a>
+    </div>
+    
+    <div class="card">
+      <div class="icon"><i class="fas fa-user-graduate"></i></div>
+      <h3>Intermedios (13-15 años)</h3>
+      <p>Arduino, sensores, diseño 3D básico, electrónica práctica y fundamentos de IoT.</p>
+      <ul>
+        <li>Duración: 4 meses</li>
+        <li>Sesiones: 2 por semana</li>
+        <li>Incluye kit Arduino completo</li>
+      </ul>
+      <a href="#reservacion" class="btn btn-outline">Más información</a>
+    </div>
+    
+    <div class="card">
+      <div class="icon"><i class="fas fa-rocket"></i></div>
+      <h3>Avanzados (16-18 años)</h3>
+      <p>Unity para videojuegos, robótica autónoma, inteligencia artificial básica y desarrollo de apps.</p>
+      <ul>
+        <li>Duración: 6 meses</li>
+        <li>Sesiones: 3 por semana</li>
+        <li>Proyecto final certificado</li>
+      </ul>
+      <a href="#reservacion" class="btn btn-outline">Más información</a>
+    </div>
+  </div>
+</section>
+
+<section id="escuelas" class="fade-in delay-2">
+  <h2>Programas para Escuelas</h2>
+  <div class="card">
+    <p>Ofrecemos soluciones educativas completas para instituciones:</p>
+    
+    <div class="card-container" style="margin-top: 2rem;">
+      <div class="card">
+        <h3>Talleres Semanales</h3>
+        <p>Actividades extracurriculares con seguimiento personalizado y reportes de avance.</p>
+      </div>
+      
+      <div class="card">
+        <h3>Capacitación Docente</h3>
+        <p>Formación en tecnologías educativas para maestros y personal académico.</p>
+      </div>
+      
+      <div class="card">
+        <h3>Laboratorios Tecnológicos</h3>
+        <p>Equipamiento completo de aulas con tecnología educativa y soporte continuo.</p>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="#contacto" class="btn">Solicitar información</a>
+    </div>
+  </div>
+</section>
+
+<section id="catalogo" class="fade-in delay-3">
+  <h2>Nuestro Catálogo de Productos</h2>
+  
+  <div class="card" style="text-align: center; padding: 3rem;">
+    <div class="icon" style="font-size: 4rem; color: var(--accent);">
+      <i class="fas fa-book-open"></i>
+    </div>
+    <h3>Explora nuestro catálogo completo</h3>
+    <p>Descubre todos nuestros productos y kits tecnológicos disponibles en nuestro catálogo digital interactivo</p>
+    
+    <a href="https://catalogocitz.my.canva.site/" target="_blank" class="btn" style="margin-top: 1.5rem;">
+      <i class="fas fa-external-link-alt"></i> Ver Catálogo Completo
+    </a>
+    
+    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--dark); opacity: 0.7;">
+      <i class="fas fa-info-circle"></i> El catálogo se abrirá en una nueva ventana
+    </p>
+  </div>
+</section>
+
+<section id="testimonios" class="testimonials fade-in">
+  <h2>Lo que dicen nuestros estudiantes</h2>
+  <div class="card-container">
+    <div class="card">
+      <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+        <img src="https://via.placeholder.com/60?text=Avatar" alt="Ana G." style="border-radius: 50%; margin-right: 1rem;">
+        <div>
+          <h4 style="margin: 0;">Ana G.</h4>
+          <div style="color: var(--accent);">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+      <p>"Mi hijo de 10 años ha aprendido más en 2 meses que en todo el año escolar. Los kits son excelentes y los profesores muy pacientes."</p>
+    </div>
+    
+    <div class="card">
+      <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+        <img src="https://via.placeholder.com/60?text=Avatar" alt="Carlos M." style="border-radius: 50%; margin-right: 1rem;">
+        <div>
+          <h4 style="margin: 0;">Carlos M.</h4>
+          <div style="color: var(--accent);">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+      <p>"Como escuela, hemos implementado su programa y los resultados en nuestros alumnos han sido extraordinarios. ¡Totalmente recomendado!"</p>
+    </div>
+    
+    <div class="card">
+      <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+        <img src="https://via.placeholder.com/60?text=Avatar" alt="Luisa P." style="border-radius: 50%; margin-right: 1rem;">
+        <div>
+          <h4 style="margin: 0;">Luisa P.</h4>
+          <div style="color: var(--accent);">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+      </div>
+      <p>"El curso avanzado me preparó para mi carrera en ingeniería. Los proyectos son desafiantes pero muy bien explicados."</p>
+    </div>
+  </div>
+</section>
+
+<section id="reservacion">
+  <h2>Reserva tu Clase Muestra Gratis</h2>
+  <div class="card">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <p>Agenda una sesión gratuita de 30 minutos para conocer nuestro método de enseñanza.</p>
+    </div>
+    
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FMexico_City&src=Y2l0emFwb3BhbkBnbWFpbC5jb20&color=%23039BE5" 
+            style="width:100%; height:600px; border:none; border-radius:8px;"></iframe>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+      <p>O contáctanos directamente:</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+        <a href="https://wa.me/523312476413" target="_blank" class="btn" style="background-color: #25D366;">
+          <i class="fab fa-whatsapp"></i> WhatsApp: 33 1247 6413
+        </a>
+        <a href="tel:+523312476413" class="btn" style="background-color: var(--secondary);">
+          <i class="fas fa-phone"></i> Llamar: 33 1247 6413
+        </a>
+        <a href="mailto:citzapopan@gmail.com" class="btn btn-outline">
+          <i class="fas fa-envelope"></i> Email: citzapopan@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <h2>Contáctanos</h2>
+  <div class="contact-form">
+    <form>
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono">
+      </div>
+      
+      <div class="form-group">
+        <label for="interes">Me interesa</label>
+        <select id="interes">
+          <option value="">Selecciona una opción</option>
+          <option value="cursos">Cursos para mi hijo</option>
+          <option value="escuela">Programa para mi escuela</option>
+          <option value="productos">Comprar productos</option>
+          <option value="otros">Otro</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" required></textarea>
+      </div>
+      
+      <button type="submit" class="btn" style="width: 100%;">
+        <i class="fas fa-paper-plane"></i> Enviar mensaje
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>CITZapopan</h3>
+      <p>Centro de Innovación Tecnológica de Zapopan. Formando a la próxima generación de creadores tecnológicos.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Enlaces rápidos</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
+        <li><a href="#cursos" style="color: white; text-decoration: none;">Cursos</a></li>
+        <li><a href="#escuelas" style="color: white; text-decoration: none;">Para escuelas</a></li>
+        <li><a href="#catalogo" style="color: white; text-decoration: none;">Catálogo</a></li>
+        <li><a href="#contacto" style="color: white; text-decoration: none;">Contacto</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Contacto</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Av. Tecnológico 123, Zapopan, Jalisco</p>
+      <p><i class="fas fa-phone"></i> (33) 1247 6413</p>
+      <p><i class="fas fa-envelope"></i> citzapopan@gmail.com</p>
+      <p><i class="fas fa-clock"></i> Lunes a Viernes: 9am - 6pm</p>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>&copy; 2025 CITZapopan. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth scrolling para los enlaces del menú
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+      
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      window.scrollTo({
+        top: targetElement.offsetTop - 70,
+        behavior: 'smooth'
+      });
+    });
+  });
+  
+  // Cambiar clase active al hacer scroll
+  window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      
+      if (pageYOffset >= (sectionTop - 100)) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+  
+  // Animación al cargar
+  document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach(el => {
+      el.style.opacity = '0';
+    });
+  });
+</script>
+</body>
+</html>

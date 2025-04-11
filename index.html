@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CITZapopan - Centro de Innovación Tecnológica</title>
   
-  <!-- Favicon (icono del navegador) -->
-  <link rel="icon" href="" type="image/ico">
-  <link rel="icon" href="file:///C:/Users/02/Documents/citz/corporativo/icono.ico" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/todolandia/citzapopan/blob/main/icono.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://github.com/todolandia/citzapopan/blob/main/icono.ico" type="image/x-icon">
+  
+  <!-- CSS de Slick para el slider -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
   <style>
-
-     :root {
+    :root {
       --primary: #6a1b9a;
       --secondary: #8e24aa;
       --accent: #ffab00;
@@ -35,7 +36,7 @@
     header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      padding: 4rem 1rem;
+      padding: 2rem 1rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -62,11 +63,70 @@
     }
     
     header p {
-      margin: 1rem 0 0;
-      font-size: 1.5rem;
+  margin: 1.5rem 0 0; /* Aumenté el margen superior */
+  padding-bottom: 0.5rem; /* Espacio adicional */
+}
+    
+    /* Slider */
+    .main-slider {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 20px;
       position: relative;
       z-index: 2;
-      opacity: 0.9;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    .slide {
+      width: 1200px;
+      height: 400px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .slide a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Estilos del slider */
+    .slick-prev, .slick-next {
+      width: 40px;
+      height: 40px;
+      z-index: 10;
+    }
+    
+    .slick-prev {
+      left: 20px;
+    }
+    
+    .slick-next {
+      right: 20px;
+    }
+    
+    .slick-prev:before, .slick-next:before {
+      font-size: 40px;
+      color: var(--accent);
+    }
+    
+    .slick-dots {
+      bottom: 20px;
+    }
+    
+    .slick-dots li button:before {
+      font-size: 12px;
+      color: white;
+    }
+    
+    .slick-dots li.slick-active button:before {
+      color: var(--accent);
     }
     
     nav {
@@ -326,6 +386,19 @@
       section {
         padding: 2rem 1rem;
       }
+      
+      .main-slider {
+        max-width: 100%;
+      }
+      
+      .slide {
+        width: 100%;
+        height: 300px;
+      }
+      
+      .slick-prev, .slick-next {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -333,17 +406,43 @@
 
 <header>
   <h1>CITZapopan</h1>
-  <p>Centro de Innovación Tecnológica de Zapopan</p>
+  <h2 style="margin-top: -10px;"><em>Centro de Innovación Tecnológica de Zapopan</em></h2>
 </header>
-
-
 <nav>
   <a href="#inicio" class="active"><i class="fas fa-home"></i> Inicio</a>
   <a href="#cursos"><i class="fas fa-graduation-cap"></i> Cursos</a>
-  <a href="#escuelas"><i class="fas fa-school"></i> Escuelas</a>
+  <a href="#escuela"><i class="fas fa-school"></i> Escuelas</a>
   <a href="#catalogo"><i class="fas fa-robot"></i> Catálogo</a>
   <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
 </nav>
+<br><br>
+<br>
+
+
+<!-- Slider de imágenes -->
+<div class="main-slider">
+  <div class="slide">
+    <a href="#">
+    <img src="https://github.com/todolandia/citzapopan/blob/main/banner1.png" alt="Banner 1">
+    </a>
+  </div>
+  <div class="slide">
+    <a href="#">
+    <img src="https://github.com/todolandia/citzapopan/blob/main/banner2.png" alt="Banner 2">
+    </a>
+  </div>
+  <div class="slide">
+    <a href="#">
+    <img src="https://github.com/todolandia/citzapopan/blob/main/banner3.png" alt="Banner 3">
+    </a>
+  </div>
+  <div class="slide">
+    <a href="#">
+    <img src="https://github.com/todolandia/citzapopan/blob/main/banner4.png" alt="Banner 4">
+    </a>
+  </div>
+</div>
+
 
 <section id="inicio" class="fade-in">
   <h2>Bienvenido a CITZapopan</h2>
@@ -362,7 +461,7 @@
 </section>
 
 <section id="cursos" class="fade-in delay-1">
-  <h2>Nuestros Cursos</h2>
+<h2>Nuestros Cursos</h2>
   <div class="card-container">
     <div class="card">
       <div class="icon"><i class="fas fa-baby"></i></div>
@@ -388,21 +487,17 @@
       <a href="#reservacion" class="btn btn-outline">Más información</a>
     </div>
     
-    <div class="card">
-      <div class="icon"><i class="fas fa-rocket"></i></div>
-      <h3>Avanzados (16-18 años)</h3>
-      <p>Unity para videojuegos, robótica autónoma, inteligencia artificial básica y desarrollo de apps.</p>
-      <ul>
-        <li>Duración: 6 meses</li>
-        <li>Sesiones: 3 por semana</li>
-        <li>Proyecto final certificado</li>
-      </ul>
-      <a href="#reservacion" class="btn btn-outline">Más información</a>
+    <div class="slide">
+      <a href="#">
+      <img src="https://via.placeholder.com/1200x400?text=Banner+4" alt="Banner 4">
+      </a>
     </div>
   </div>
+</div>
+
 </section>
 
-<section id="escuelas" class="fade-in delay-2">
+<section id="escuela" class="fade-in delay-2">
   <h2>Programas para Escuelas</h2>
   <div class="card">
     <p>Ofrecemos soluciones educativas completas para instituciones:</p>
@@ -613,7 +708,32 @@
   </div>
 </footer>
 
+<!-- Scripts para el slider -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
+  // Inicializar el slider
+  $(document).ready(function(){
+    $('.main-slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      arrows: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            arrows: false
+          }
+        }
+      ]
+    });
+  });
+
   // Smooth scrolling para los enlaces del menú
   document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba Video CITZapopan</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0A1628;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    color: #E87A3E;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.video-box {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(232,122,62,0.4);
+    box-shadow: 0 0 30px rgba(232,122,62,0.3);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎬 Prueba de Video desde GitHub</h1>
+    <p>Si este video se reproduce, tu hosting en GitHub está funcionando correctamente.</p>
+
+    <div class="video-box">
+
+        <video controls autoplay muted loop playsinline>
+            <source src="https://media.githubusercontent.com/media/todolandia/arre/main/online.mp4" type="video/mp4">
+            Tu navegador no soporta video HTML5.
+        </video>
+
+    </div>
+
+</div>
+
+</body>
+</html>

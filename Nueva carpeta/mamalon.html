@@ -1,0 +1,4763 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Crepas el Neza - Punto de Venta</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#f2f3f5;
+
+    color:#222;
+
+}
+
+button{
+
+    cursor:pointer;
+
+    border:0;
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard{
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+
+
+    background-image:
+
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.25)
+        ),
+
+        url("fondo.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
+
+
+.logo{
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.7);
+
+    margin-bottom:8px;
+
+    text-align:center;
+
+}
+
+
+.subtitle{
+
+    color:white;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.7);
+
+    margin-bottom:35px;
+
+    font-size:18px;
+
+}
+
+
+.main-menu{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,280px);
+
+    gap:25px;
+
+}
+
+
+.menu-card{
+
+    background:
+        rgba(255,255,255,.94);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.30);
+
+    text-align:center;
+
+    transition:.2s;
+
+    width:280px;
+
+}
+
+
+.menu-card:hover{
+
+    transform:
+        translateY(-5px);
+
+}
+
+
+.menu-image{
+
+    width:210px;
+
+    height:210px;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin:0 auto 15px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.menu-image:hover{
+
+    transform:
+        scale(1.06);
+
+}
+
+
+.menu-card h2{
+
+    margin-bottom:8px;
+
+}
+
+
+.menu-card p{
+
+    color:#555;
+
+    margin-bottom:15px;
+
+}
+
+
+.menu-card button{
+
+    background:#e85d04;
+
+    color:white;
+
+    padding:13px 30px;
+
+    border-radius:9px;
+
+    font-size:16px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar{
+
+    background:#222;
+
+    color:white;
+
+    height:65px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 25px;
+
+}
+
+
+.brand{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+
+.top-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+.top-actions button{
+
+    background:#444;
+
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:7px;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    padding:25px;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+.page-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+}
+
+
+.page-title h1{
+
+    font-size:28px;
+
+}
+
+
+.back-btn{
+
+    background:#555;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,.06);
+
+}
+
+
+.card h2{
+
+    margin-bottom:18px;
+
+}
+
+
+/* =====================================================
+   FORMULARIOS
+===================================================== */
+
+.form-group{
+
+    margin-bottom:15px;
+
+}
+
+
+.form-group label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:6px;
+
+}
+
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:11px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius:7px;
+
+    font-size:15px;
+
+}
+
+
+textarea{
+
+    resize:vertical;
+
+    min-height:70px;
+
+}
+
+
+.primary{
+
+    background:#e85d04;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:7px;
+
+    font-size:15px;
+
+}
+
+
+.success{
+
+    background:#198754;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:7px;
+
+}
+
+
+.danger{
+
+    background:#dc3545;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:7px;
+
+}
+
+
+.secondary{
+
+    background:#666;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:7px;
+
+}
+
+
+/* =====================================================
+   CAJA
+===================================================== */
+
+.cash-status{
+
+    padding:20px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+.cash-open{
+
+    background:#dff6e5;
+
+    color:#18753c;
+
+}
+
+
+.cash-closed{
+
+    background:#ffe1e1;
+
+    color:#9b2226;
+
+}
+
+
+.cash-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+.stat{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    margin-top:10px;
+
+}
+
+
+.denominations{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+}
+
+
+.denomination{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+}
+
+
+.denomination span{
+
+    min-width:75px;
+
+    font-weight:bold;
+
+}
+
+
+.cash-result{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    background:#f3f3f3;
+
+}
+
+
+.difference{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    margin-top:10px;
+
+}
+
+
+/* =====================================================
+   RESTAURANTE
+===================================================== */
+
+.restaurant-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 380px;
+
+    gap:20px;
+
+}
+
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+
+}
+
+
+.product{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,.06);
+
+}
+
+
+.product-category{
+
+    font-size:12px;
+
+    color:#e85d04;
+
+    font-weight:bold;
+
+    text-transform:uppercase;
+
+}
+
+
+.product h3{
+
+    margin:8px 0;
+
+}
+
+
+.product-description{
+
+    color:#777;
+
+    font-size:14px;
+
+    min-height:35px;
+
+}
+
+
+.price{
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin:12px 0;
+
+}
+
+
+.modifier-select{
+
+    margin-bottom:10px;
+
+}
+
+
+.product button{
+
+    width:100%;
+
+    background:#e85d04;
+
+    color:white;
+
+    padding:11px;
+
+    border-radius:7px;
+
+}
+
+
+/* =====================================================
+   CARRITO
+===================================================== */
+
+.cart{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    position:sticky;
+
+    top:15px;
+
+    height:max-content;
+
+}
+
+
+.cart-item{
+
+    border-bottom:
+        1px solid #ddd;
+
+    padding:12px 0;
+
+}
+
+
+.cart-item-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+
+.cart-item small{
+
+    color:#777;
+
+}
+
+
+.cart-total{
+
+    font-size:27px;
+
+    font-weight:bold;
+
+    margin:20px 0;
+
+    text-align:right;
+
+}
+
+
+.payment-box{
+
+    border-top:
+        1px solid #ddd;
+
+    padding-top:15px;
+
+}
+
+
+.change{
+
+    padding:14px;
+
+    background:#e8f7ec;
+
+    color:#18753c;
+
+    border-radius:8px;
+
+    margin:10px 0;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+   TABLA PEDIDOS
+===================================================== */
+
+.orders-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+}
+
+
+.orders-table th,
+.orders-table td{
+
+    padding:13px;
+
+    border-bottom:
+        1px solid #ddd;
+
+    text-align:left;
+
+}
+
+
+.orders-table th{
+
+    background:#222;
+
+    color:white;
+
+}
+
+
+.status{
+
+    padding:5px 9px;
+
+    border-radius:15px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.status-pendiente{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+}
+
+
+.status-preparando{
+
+    background:#cfe2ff;
+
+    color:#084298;
+
+}
+
+
+.status-listo{
+
+    background:#d1e7dd;
+
+    color:#0f5132;
+
+}
+
+
+.status-entregado{
+
+    background:#e2e3e5;
+
+    color:#41464b;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:1000;
+
+}
+
+
+.modal.active{
+
+    display:flex;
+
+}
+
+
+.modal-box{
+
+    background:white;
+
+    width:90%;
+
+    max-width:700px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    border-radius:14px;
+
+    padding:25px;
+
+}
+
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+}
+
+
+.close{
+
+    background:#ddd;
+
+    border-radius:50%;
+
+    width:35px;
+
+    height:35px;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#222;
+
+    color:white;
+
+    padding:15px 20px;
+
+    border-radius:8px;
+
+    display:none;
+
+    z-index:3000;
+
+}
+
+
+.toast.show{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .main-menu{
+
+        grid-template-columns:
+            1fr;
+
+        width:100%;
+
+        max-width:400px;
+
+    }
+
+
+    .menu-card{
+
+        width:100%;
+
+    }
+
+
+    .cash-grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .restaurant-grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .products{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .products{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .page{
+
+        padding:15px;
+
+    }
+
+
+    .topbar{
+
+        padding:0 12px;
+
+    }
+
+
+    .denominations{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .logo{
+
+        font-size:32px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app"></div>
+
+
+<div id="toast"
+     class="toast">
+</div>
+
+
+<!-- =====================================================
+     MODAL PEDIDO
+===================================================== -->
+
+<div id="orderModal"
+     class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Detalle del pedido
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div id="orderDetails"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+const BUSINESS_NAME =
+    "Crepas el Neza";
+
+
+/* =====================================================
+   PRODUCTOS
+===================================================== */
+
+let products =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "nezaProducts"
+    )
+
+) ||
+
+[
+
+    {
+
+        id:1,
+
+        category:"Crepas",
+
+        name:"Crepa",
+
+        modifierName:"Tipo",
+
+        modifiers:
+        [
+
+            "Fresa",
+
+            "Cajeta",
+
+            "Salada"
+
+        ],
+
+        description:
+            "Crepa preparada al momento.",
+
+        price:65
+
+    },
+
+
+    {
+
+        id:2,
+
+        category:"Postres",
+
+        name:"Fresas con crema",
+
+        modifierName:"Tamaño",
+
+        modifiers:
+        [
+
+            "Ch",
+
+            "Med",
+
+            "Gde"
+
+        ],
+
+        description:
+            "Fresas frescas con crema.",
+
+        price:50
+
+    },
+
+
+    {
+
+        id:3,
+
+        category:"Bebidas",
+
+        name:"Café",
+
+        modifierName:"Preparación",
+
+        modifiers:
+        [
+
+            "Americano",
+
+            "Ice latte",
+
+            "Capuchino"
+
+        ],
+
+        description:
+            "Café preparado al momento.",
+
+        price:45
+
+    }
+
+];
+
+
+/* =====================================================
+   VENTAS
+===================================================== */
+
+let sales =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "nezaSales"
+    )
+
+) || [];
+
+
+/* =====================================================
+   PEDIDOS
+===================================================== */
+
+let orders =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "nezaOrders"
+    )
+
+) || [];
+
+
+/* =====================================================
+   CORTES
+===================================================== */
+
+let closures =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "nezaClosures"
+    )
+
+) || [];
+
+
+/* =====================================================
+   CAJA ACTUAL
+===================================================== */
+
+let cashShift =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "nezaCashShift"
+    )
+
+) || null;
+
+
+/* =====================================================
+   CARRITO
+===================================================== */
+
+let cart = [];
+
+
+/* =====================================================
+   DENOMINACIONES
+===================================================== */
+
+const denominations =
+
+[
+
+    {
+        name:"$1000",
+        value:1000
+    },
+
+    {
+        name:"$500",
+        value:500
+    },
+
+    {
+        name:"$200",
+        value:200
+    },
+
+    {
+        name:"$100",
+        value:100
+    },
+
+    {
+        name:"$50",
+        value:50
+    },
+
+    {
+        name:"$20",
+        value:20
+    },
+
+    {
+        name:"$10",
+        value:10
+    },
+
+    {
+        name:"$5",
+        value:5
+    },
+
+    {
+        name:"$2",
+        value:2
+    },
+
+    {
+        name:"$1",
+        value:1
+    },
+
+    {
+        name:"$0.50",
+        value:.5
+    }
+
+];
+
+
+/* =====================================================
+   UTILIDADES
+===================================================== */
+
+function money(value){
+
+    return "$" +
+
+        Number(value || 0)
+
+        .toLocaleString(
+
+            "es-MX",
+
+            {
+
+                minimumFractionDigits:2,
+
+                maximumFractionDigits:2
+
+            }
+
+        );
+
+}
+
+
+function toast(message){
+
+    const element =
+
+        document.getElementById(
+            "toast"
+        );
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+
+        ()=>{
+
+            element.classList.remove(
+                "show"
+            );
+
+        },
+
+        2500
+
+    );
+
+}
+
+
+function saveAll(){
+
+    localStorage.setItem(
+
+        "nezaProducts",
+
+        JSON.stringify(
+            products
+        )
+
+    );
+
+
+    localStorage.setItem(
+
+        "nezaSales",
+
+        JSON.stringify(
+            sales
+        )
+
+    );
+
+
+    localStorage.setItem(
+
+        "nezaOrders",
+
+        JSON.stringify(
+            orders
+        )
+
+    );
+
+
+    localStorage.setItem(
+
+        "nezaClosures",
+
+        JSON.stringify(
+            closures
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function showDashboard(){
+
+    document.getElementById(
+        "app"
+    ).innerHTML = `
+
+
+        <div class="dashboard">
+
+
+            <div class="logo">
+
+                🥞 ${BUSINESS_NAME}
+
+            </div>
+
+
+            <div class="subtitle">
+
+                Sistema Punto de Venta
+
+            </div>
+
+
+            <div class="main-menu">
+
+
+                <!-- CAJA -->
+
+                <div class="menu-card">
+
+
+                    <img
+
+                        src="caja.png"
+
+                        class="menu-image"
+
+                        alt="Caja"
+
+                        onclick="showCash()"
+
+                    >
+
+
+                    <h2>
+
+                        Caja
+
+                    </h2>
+
+
+                    <p>
+
+                        Apertura, fondo,
+                        ventas y cierre.
+
+                    </p>
+
+
+                    <button
+
+                        onclick="showCash()">
+
+                        Entrar a Caja
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- RESTAURANTE -->
+
+                <div class="menu-card">
+
+
+                    <img
+
+                        src="restaurante.png"
+
+                        class="menu-image"
+
+                        alt="Restaurante"
+
+                        onclick="showRestaurant()"
+
+                    >
+
+
+                    <h2>
+
+                        Restaurante
+
+                    </h2>
+
+
+                    <p>
+
+                        Ventas, productos
+                        y pedidos.
+
+                    </p>
+
+
+                    <button
+
+                        onclick="showRestaurant()">
+
+                        Entrar
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+function header(title){
+
+    return `
+
+
+        <div class="topbar">
+
+
+            <div class="brand">
+
+                🥞 ${BUSINESS_NAME}
+
+            </div>
+
+
+            <div class="top-actions">
+
+
+                <button
+
+                    onclick="showDashboard()">
+
+                    Menú principal
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="page">
+
+
+            <div class="page-title">
+
+
+                <h1>
+
+                    ${title}
+
+                </h1>
+
+
+                <button
+
+                    class="back-btn"
+
+                    onclick="showDashboard()">
+
+                    ← Regresar
+
+                </button>
+
+
+            </div>
+
+
+    `;
+
+}
+
+
+/* =====================================================
+   CAJA
+===================================================== */
+
+function showCash(){
+
+    document.getElementById(
+        "app"
+    ).innerHTML =
+
+        header("Caja") +
+
+        `
+
+            <div id="cashContent"></div>
+
+        </div>
+
+        `;
+
+
+    renderCash();
+
+}
+
+
+function renderCash(){
+
+    const container =
+
+        document.getElementById(
+            "cashContent"
+        );
+
+
+    if(!container)
+        return;
+
+
+    /* CAJA CERRADA */
+
+    if(!cashShift){
+
+        container.innerHTML = `
+
+
+            <div class="cash-status cash-closed">
+
+                🔴 CAJA CERRADA
+
+            </div>
+
+
+            <div class="cash-grid">
+
+
+                <div class="card">
+
+
+                    <h2>
+
+                        Apertura de caja
+
+                    </h2>
+
+
+                    <div class="form-group">
+
+
+                        <label>
+
+                            Fondo inicial
+
+                        </label>
+
+
+                        <input
+
+                            type="number"
+
+                            id="openingFund"
+
+                            min="0"
+
+                            step="0.01"
+
+                            placeholder="Ej. 500"
+
+                        >
+
+
+                    </div>
+
+
+                    <button
+
+                        class="primary"
+
+                        onclick="openCashShift()">
+
+                        🔓 Abrir caja
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="card">
+
+
+                    <h2>
+
+                        Nuevo turno
+
+                    </h2>
+
+
+                    <p>
+
+                        Cada apertura genera
+                        un nuevo turno.
+
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+
+                        Las ventas anteriores
+                        permanecen en el historial
+                        pero no se mezclan con
+                        este turno.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="card">
+
+
+                    <h2>
+
+                        Historial
+
+                    </h2>
+
+
+                    <button
+
+                        class="secondary"
+
+                        onclick="showClosures()">
+
+                        Ver cortes
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    const shiftSales =
+        getShiftSales();
+
+
+    const salesAmount =
+        getCashSales();
+
+
+    const expected =
+        getExpectedCash();
+
+
+    container.innerHTML = `
+
+
+        <div class="cash-status cash-open">
+
+            🟢 CAJA ABIERTA
+
+            <br>
+
+            <small>
+
+                Apertura:
+                ${cashShift.openedAt}
+
+            </small>
+
+        </div>
+
+
+
+        <div class="cash-grid">
+
+
+            <div class="card">
+
+
+                <h2>
+
+                    Fondo inicial
+
+                </h2>
+
+
+                <div class="stat">
+
+                    ${money(
+                        cashShift.openingFund
+                    )}
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="card">
+
+
+                <h2>
+
+                    Ventas del turno
+
+                </h2>
+
+
+                <div class="stat">
+
+                    ${money(
+                        salesAmount
+                    )}
+
+                </div>
+
+
+                <p>
+
+                    ${shiftSales.length}
+                    venta(s)
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="card">
+
+
+                <h2>
+
+                    Efectivo esperado
+
+                </h2>
+
+
+                <div class="stat">
+
+                    ${money(
+                        expected
+                    )}
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <br>
+
+
+        <div class="card">
+
+
+            <h2>
+
+                Cierre de caja
+
+            </h2>
+
+
+            <p>
+
+                Cuenta físicamente
+                el efectivo y registra
+                las cantidades.
+
+            </p>
+
+
+            <br>
+
+
+            <div class="denominations">
+
+
+                ${denominations.map(
+
+                    (d,i)=>`
+
+
+                        <div
+                            class="denomination">
+
+
+                            <span>
+
+                                ${d.name}
+
+                            </span>
+
+
+                            <input
+
+                                type="number"
+
+                                min="0"
+
+                                value="0"
+
+                                id="denom-${i}"
+
+                                oninput=
+                                    "calculateCount()"
+
+                            >
+
+
+                        </div>
+
+
+                `).join("")}
+
+
+            </div>
+
+
+            <div
+
+                id="countResult"
+
+                class="cash-result">
+
+
+                Efectivo contado:
+
+                <strong>
+
+                    $0.00
+
+                </strong>
+
+
+            </div>
+
+
+            <br>
+
+
+            <button
+
+                class="danger"
+
+                onclick="closeCashShift()">
+
+
+                🔒 Cerrar caja
+
+
+            </button>
+
+
+        </div>
+
+
+        <br>
+
+
+        <div class="card">
+
+
+            <h2>
+
+                Ventas del turno
+
+            </h2>
+
+
+            ${renderShiftSales()}
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CALCULAR EFECTIVO
+===================================================== */
+
+function calculateCount(){
+
+    let total = 0;
+
+
+    denominations.forEach(
+
+        (d,i)=>{
+
+
+            const input =
+
+                document.getElementById(
+                    `denom-${i}`
+                );
+
+
+            if(input){
+
+                total +=
+
+                    (
+                        parseInt(
+                            input.value
+                        ) || 0
+
+                    ) *
+
+                    d.value;
+
+            }
+
+
+        }
+
+    );
+
+
+    const result =
+
+        document.getElementById(
+            "countResult"
+        );
+
+
+    if(!result)
+        return;
+
+
+    const expected =
+        getExpectedCash();
+
+
+    const difference =
+        total - expected;
+
+
+    let label =
+        "Caja cuadrada";
+
+
+    if(difference > 0){
+
+        label =
+            "Sobrante";
+
+    }
+
+
+    if(difference < 0){
+
+        label =
+            "Faltante";
+
+    }
+
+
+    result.innerHTML = `
+
+
+        Efectivo contado:
+
+        <strong>
+
+            ${money(total)}
+
+        </strong>
+
+
+        <div class="difference">
+
+
+            ${label}:
+
+
+            ${money(
+                Math.abs(
+                    difference
+                )
+            )}
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   APERTURA DE CAJA
+===================================================== */
+
+function openCashShift(){
+
+    if(cashShift){
+
+        toast(
+            "La caja ya está abierta."
+        );
+
+        return;
+
+    }
+
+
+    const input =
+
+        document.getElementById(
+            "openingFund"
+        );
+
+
+    const amount =
+
+        parseFloat(
+            input.value
+        );
+
+
+    if(
+
+        isNaN(amount) ||
+
+        amount < 0
+
+    ){
+
+        toast(
+            "Ingresa un fondo válido."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        NUEVO TURNO
+
+        Las ventas del turno
+        empiezan automáticamente
+        en cero.
+    */
+
+    const shiftId =
+        Date.now();
+
+
+    cashShift = {
+
+
+        id:
+            shiftId,
+
+
+        openedAt:
+
+            new Date()
+
+            .toLocaleString(
+                "es-MX"
+            ),
+
+
+        openingFund:
+            amount
+
+    };
+
+
+    localStorage.setItem(
+
+        "nezaCashShift",
+
+        JSON.stringify(
+            cashShift
+        )
+
+    );
+
+
+    renderCash();
+
+
+    toast(
+
+        "🔓 Caja abierta. " +
+
+        "Ventas del turno: $0.00"
+
+    );
+
+}
+
+
+/* =====================================================
+   VENTAS DEL TURNO
+===================================================== */
+
+function getShiftSales(){
+
+    if(!cashShift)
+        return [];
+
+
+    return sales.filter(
+
+        sale =>
+
+            sale.shiftId ===
+            cashShift.id
+
+    );
+
+}
+
+
+function getCashSales(){
+
+    return getShiftSales()
+
+        .reduce(
+
+            (sum,sale)=>
+
+                sum +
+
+                Number(
+                    sale.total
+                ),
+
+            0
+
+        );
+
+}
+
+
+function getExpectedCash(){
+
+    if(!cashShift)
+        return 0;
+
+
+    return
+
+        Number(
+            cashShift.openingFund
+        )
+
+        +
+
+        getCashSales();
+
+}
+
+
+function renderShiftSales(){
+
+    const shiftSales =
+        getShiftSales();
+
+
+    if(
+        shiftSales.length === 0
+    ){
+
+        return `
+
+            <p>
+
+                No hay ventas
+                en este turno.
+
+            </p>
+
+        `;
+
+    }
+
+
+    return `
+
+
+        <table class="orders-table">
+
+
+            <thead>
+
+
+                <tr>
+
+
+                    <th>
+                        Hora
+                    </th>
+
+
+                    <th>
+                        Pedido
+                    </th>
+
+
+                    <th>
+                        Total
+                    </th>
+
+
+                </tr>
+
+
+            </thead>
+
+
+            <tbody>
+
+
+                ${shiftSales.map(
+
+                    sale=>`
+
+
+                    <tr>
+
+
+                        <td>
+
+                            ${sale.date}
+
+                        </td>
+
+
+                        <td>
+
+                            #${sale.orderId}
+
+                        </td>
+
+
+                        <td>
+
+                            ${money(
+                                sale.total
+                            )}
+
+                        </td>
+
+
+                    </tr>
+
+
+                `
+
+                ).join("")}
+
+
+            </tbody>
+
+
+        </table>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CIERRE DE CAJA
+===================================================== */
+
+function closeCashShift(){
+
+    if(!cashShift){
+
+        toast(
+            "La caja ya está cerrada."
+        );
+
+        return;
+
+    }
+
+
+    let counted = 0;
+
+
+    denominations.forEach(
+
+        (d,i)=>{
+
+
+            const input =
+
+                document.getElementById(
+                    `denom-${i}`
+                );
+
+
+            counted +=
+
+                (
+
+                    parseInt(
+                        input.value
+                    ) || 0
+
+                )
+
+                *
+
+                d.value;
+
+
+        }
+
+    );
+
+
+    const expected =
+        getExpectedCash();
+
+
+    const difference =
+        counted - expected;
+
+
+    let resultText =
+        "CAJA CUADRADA";
+
+
+    if(difference > 0){
+
+        resultText =
+            "SOBRANTE";
+
+    }
+
+
+    if(difference < 0){
+
+        resultText =
+            "FALTANTE";
+
+    }
+
+
+    const confirmation =
+
+        confirm(
+
+            "CIERRE DE CAJA\n\n" +
+
+            "Fondo inicial: " +
+
+            money(
+                cashShift.openingFund
+            ) +
+
+            "\nVentas: " +
+
+            money(
+                getCashSales()
+            ) +
+
+            "\nEsperado: " +
+
+            money(
+                expected
+            ) +
+
+            "\nContado: " +
+
+            money(
+                counted
+            ) +
+
+            "\n\n" +
+
+            resultText +
+
+            ": " +
+
+            money(
+
+                Math.abs(
+                    difference
+                )
+
+            ) +
+
+            "\n\n¿Cerrar caja?"
+
+        );
+
+
+    if(!confirmation)
+        return;
+
+
+    const closure = {
+
+
+        shiftId:
+            cashShift.id,
+
+
+        openedAt:
+            cashShift.openedAt,
+
+
+        closedAt:
+
+            new Date()
+
+            .toLocaleString(
+                "es-MX"
+            ),
+
+
+        openingFund:
+            cashShift.openingFund,
+
+
+        salesCount:
+            getShiftSales().length,
+
+
+        salesAmount:
+            getCashSales(),
+
+
+        expected:
+            expected,
+
+
+        counted:
+            counted,
+
+
+        difference:
+            difference
+
+    };
+
+
+    closures.push(
+        closure
+    );
+
+
+    localStorage.setItem(
+
+        "nezaClosures",
+
+        JSON.stringify(
+            closures
+        )
+
+    );
+
+
+    /*
+        SE CIERRA SOLAMENTE
+        EL TURNO ACTUAL.
+
+        Las ventas históricas
+        NO se eliminan.
+    */
+
+    cashShift = null;
+
+
+    localStorage.removeItem(
+        "nezaCashShift"
+    );
+
+
+    renderCash();
+
+
+    toast(
+
+        "🔒 Caja cerrada correctamente."
+
+    );
+
+}
+
+
+/* =====================================================
+   HISTORIAL DE CORTES
+===================================================== */
+
+function showClosures(){
+
+    document.getElementById(
+        "app"
+    ).innerHTML =
+
+        header(
+            "Historial de cortes"
+        )
+
+        +
+
+        `
+
+
+        <div class="card">
+
+
+            ${
+
+
+                closures.length === 0
+
+
+                ?
+
+
+                `
+
+                <p>
+
+                    No existen
+                    cortes registrados.
+
+                </p>
+
+                `
+
+
+                :
+
+
+                `
+
+
+                <table
+                    class="orders-table">
+
+
+                    <thead>
+
+
+                        <tr>
+
+
+                            <th>
+                                Apertura
+                            </th>
+
+
+                            <th>
+                                Cierre
+                            </th>
+
+
+                            <th>
+                                Fondo
+                            </th>
+
+
+                            <th>
+                                Ventas
+                            </th>
+
+
+                            <th>
+                                Esperado
+                            </th>
+
+
+                            <th>
+                                Contado
+                            </th>
+
+
+                            <th>
+                                Diferencia
+                            </th>
+
+
+                        </tr>
+
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        ${closures
+
+                            .slice()
+
+                            .reverse()
+
+                            .map(
+
+                                c=>`
+
+
+                                <tr>
+
+
+                                    <td>
+
+                                        ${c.openedAt}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${c.closedAt}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${money(
+                                            c.openingFund
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${money(
+                                            c.salesAmount
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${money(
+                                            c.expected
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${money(
+                                            c.counted
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+
+                                        ${
+
+                                            c.difference > 0
+
+                                            ?
+
+                                            "Sobrante "
+
+                                            :
+
+                                            c.difference < 0
+
+                                            ?
+
+                                            "Faltante "
+
+                                            :
+
+                                            "Cuadrada "
+
+                                        }
+
+
+                                        ${money(
+
+                                            Math.abs(
+                                                c.difference
+                                            )
+
+                                        )}
+
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            `
+
+                            ).join("")}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+                `
+
+            }
+
+
+        </div>
+
+
+        </div>
+
+        `;
+
+}
+
+
+/* =====================================================
+   RESTAURANTE
+===================================================== */
+
+function showRestaurant(){
+
+    document.getElementById(
+        "app"
+    ).innerHTML =
+
+        header(
+            "Restaurante"
+        )
+
+        +
+
+        `
+
+
+        <div class="restaurant-grid">
+
+
+            <div>
+
+
+                <div class="card">
+
+
+                    <h2>
+
+                        Productos
+
+                    </h2>
+
+
+                    <div
+
+                        id="products"
+
+                        class="products">
+
+                    </div>
+
+
+                </div>
+
+
+                <br>
+
+
+                <div class="card">
+
+
+                    <h2>
+
+                        Gestión de pedidos
+
+                    </h2>
+
+
+                    <div
+                        id="orders">
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+
+
+                <div
+
+                    id="cart"
+
+                    class="cart">
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        </div>
+
+        `;
+
+
+    renderProducts();
+
+    renderCart();
+
+    renderOrders();
+
+}
+
+
+/* =====================================================
+   PRODUCTOS
+===================================================== */
+
+function renderProducts(){
+
+    const container =
+
+        document.getElementById(
+            "products"
+        );
+
+
+    if(!container)
+        return;
+
+
+    container.innerHTML =
+
+        products.map(
+
+            product=>`
+
+
+            <div class="product">
+
+
+                <div class="product-category">
+
+                    ${product.category}
+
+                </div>
+
+
+                <h3>
+
+                    ${product.name}
+
+                </h3>
+
+
+                <div
+                    class="product-description">
+
+                    ${product.description}
+
+                </div>
+
+
+                <div class="price">
+
+                    ${money(
+                        product.price
+                    )}
+
+                </div>
+
+
+                <select
+
+                    class="modifier-select"
+
+                    id=
+                    "modifier-${product.id}">
+
+
+                    ${product.modifiers.map(
+
+                        modifier=>`
+
+
+                            <option
+                                value="${modifier}">
+
+                                ${modifier}
+
+                            </option>
+
+
+                    `).join("")}
+
+
+                </select>
+
+
+                <button
+
+                    onclick=
+                    "addToCart(${product.id})">
+
+
+                    Agregar
+
+
+                </button>
+
+
+            </div>
+
+
+        `
+
+        ).join("");
+
+}
+
+
+/* =====================================================
+   CARRITO
+===================================================== */
+
+function addToCart(productId){
+
+    const product =
+
+        products.find(
+
+            p =>
+
+                p.id ===
+                productId
+
+        );
+
+
+    if(!product)
+        return;
+
+
+    const modifier =
+
+        document.getElementById(
+
+            `modifier-${productId}`
+
+        ).value;
+
+
+    cart.push({
+
+
+        id:
+            Date.now(),
+
+
+        productId:
+            product.id,
+
+
+        name:
+            product.name,
+
+
+        modifier:
+            modifier,
+
+
+        price:
+            product.price
+
+
+    });
+
+
+    renderCart();
+
+
+    toast(
+        "Producto agregado."
+    );
+
+}
+
+
+function removeFromCart(id){
+
+    cart =
+
+        cart.filter(
+
+            item =>
+
+                item.id !== id
+
+        );
+
+
+    renderCart();
+
+}
+
+
+function getTotal(){
+
+    return cart.reduce(
+
+        (sum,item)=>
+
+            sum +
+
+            Number(
+                item.price
+            ),
+
+        0
+
+    );
+
+}
+
+
+function renderCart(){
+
+    const container =
+
+        document.getElementById(
+            "cart"
+        );
+
+
+    if(!container)
+        return;
+
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+
+
+            <h2>
+
+                🛒 Carrito
+
+            </h2>
+
+
+            <p>
+
+                No hay productos.
+
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+
+        <h2>
+
+            🛒 Carrito
+
+        </h2>
+
+
+        ${cart.map(
+
+            item=>`
+
+
+            <div class="cart-item">
+
+
+                <div
+                    class="cart-item-header">
+
+
+                    <strong>
+
+                        ${item.name}
+
+                    </strong>
+
+
+                    <strong>
+
+                        ${money(
+                            item.price
+                        )}
+
+                    </strong>
+
+
+                </div>
+
+
+                <small>
+
+                    ${item.modifier}
+
+                </small>
+
+
+                <br>
+
+
+                <button
+
+                    class="danger"
+
+                    style="
+                        padding:5px 9px;
+                        margin-top:6px;
+                    "
+
+                    onclick=
+                    "removeFromCart(${item.id})">
+
+
+                    Eliminar
+
+
+                </button>
+
+
+            </div>
+
+
+        `
+
+        ).join("")}
+
+
+        <div class="cart-total">
+
+
+            Total:
+
+            ${money(
+                getTotal()
+            )}
+
+
+        </div>
+
+
+        <div class="payment-box">
+
+
+            <h3>
+
+                Datos del pedido
+
+            </h3>
+
+
+            <br>
+
+
+            <div class="form-group">
+
+
+                <label>
+
+                    Cliente
+
+                </label>
+
+
+                <input
+
+                    id="customerName"
+
+                    placeholder=
+                    "Nombre del cliente"
+
+                >
+
+
+            </div>
+
+
+            <div class="form-group">
+
+
+                <label>
+
+                    Tipo
+
+                </label>
+
+
+                <select
+                    id="orderType">
+
+
+                    <option>
+
+                        Mostrador
+
+                    </option>
+
+
+                    <option>
+
+                        Para llevar
+
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+
+                <label>
+
+                    Nota
+
+                </label>
+
+
+                <textarea
+
+                    id="orderNote"
+
+                    placeholder=
+                    "Indicaciones..."
+
+                ></textarea>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+
+                <label>
+
+                    Pago recibido
+
+                </label>
+
+
+                <input
+
+                    type="number"
+
+                    id="payment"
+
+                    min="0"
+
+                    step="0.01"
+
+                    oninput=
+                    "calculateChange()"
+
+                    placeholder="0.00"
+
+                >
+
+
+            </div>
+
+
+            <div
+
+                id="changeBox"
+
+                class="change">
+
+
+                Cambio:
+
+                $0.00
+
+
+            </div>
+
+
+            <button
+
+                class="success"
+
+                style="width:100%;"
+
+                onclick=
+                "processPayment()">
+
+
+                💵 Cobrar
+
+
+            </button>
+
+
+        </div>
+
+
+    `;
+
+}
+
+
+function calculateChange(){
+
+    const payment =
+
+        parseFloat(
+
+            document.getElementById(
+                "payment"
+            )?.value
+
+        ) || 0;
+
+
+    const total =
+        getTotal();
+
+
+    const change =
+        payment-total;
+
+
+    const box =
+
+        document.getElementById(
+            "changeBox"
+        );
+
+
+    if(!box)
+        return;
+
+
+    if(payment < total){
+
+
+        box.style.background =
+            "#ffe1e1";
+
+
+        box.style.color =
+            "#9b2226";
+
+
+        box.innerHTML =
+
+            "Falta: " +
+
+            money(
+                total-payment
+            );
+
+
+    }else{
+
+
+        box.style.background =
+            "#e8f7ec";
+
+
+        box.style.color =
+            "#18753c";
+
+
+        box.innerHTML =
+
+            "Cambio: " +
+
+            money(
+                change
+            );
+
+    }
+
+}
+
+
+/* =====================================================
+   COBRAR
+===================================================== */
+
+function processPayment(){
+
+    if(!cashShift){
+
+        toast(
+
+            "⚠️ Primero debes abrir la caja."
+
+        );
+
+        return;
+
+    }
+
+
+    if(cart.length === 0){
+
+        toast(
+            "El carrito está vacío."
+        );
+
+        return;
+
+    }
+
+
+    const total =
+        getTotal();
+
+
+    const payment =
+
+        parseFloat(
+
+            document.getElementById(
+                "payment"
+            ).value
+
+        ) || 0;
+
+
+    if(payment < total){
+
+        toast(
+            "El pago es insuficiente."
+        );
+
+        return;
+
+    }
+
+
+    const change =
+        payment-total;
+
+
+    const orderId =
+        getNextOrderNumber();
+
+
+    const customer =
+
+        document.getElementById(
+            "customerName"
+        )
+        .value
+        .trim()
+
+        ||
+
+        "Cliente";
+
+
+    const type =
+
+        document.getElementById(
+            "orderType"
+        ).value;
+
+
+    const note =
+
+        document.getElementById(
+            "orderNote"
+        )
+        .value
+        .trim();
+
+
+    const saleDate =
+
+        new Date()
+
+        .toLocaleString(
+            "es-MX"
+        );
+
+
+    const items =
+
+        JSON.parse(
+
+            JSON.stringify(
+                cart
+            )
+
+        );
+
+
+    const order = {
+
+
+        id:
+            orderId,
+
+
+        date:
+            saleDate,
+
+
+        customer:
+            customer,
+
+
+        type:
+            type,
+
+
+        note:
+            note,
+
+
+        status:
+            "Pendiente",
+
+
+        items:
+            items,
+
+
+        total:
+            total,
+
+
+        payment:
+            payment,
+
+
+        change:
+            change,
+
+
+        shiftId:
+            cashShift.id
+
+    };
+
+
+    orders.push(
+        order
+    );
+
+
+    sales.push({
+
+
+        id:
+            Date.now(),
+
+
+        orderId:
+            orderId,
+
+
+        shiftId:
+            cashShift.id,
+
+
+        date:
+            saleDate,
+
+
+        customer:
+            customer,
+
+
+        items:
+            items,
+
+
+        total:
+            total,
+
+
+        payment:
+            payment,
+
+
+        change:
+            change
+
+
+    });
+
+
+    saveAll();
+
+
+    /*
+        SIMULACIÓN DE PERIFÉRICOS
+    */
+
+    simulatePrinter();
+
+    simulateCashDrawer();
+
+
+    /*
+        GENERACIÓN DEL TICKET
+    */
+
+    generatePDF(
+        order
+    );
+
+
+    cart = [];
+
+
+    renderCart();
+
+    renderOrders();
+
+    renderCash();
+
+
+    toast(
+
+        `✅ Venta #${orderId} realizada. ` +
+
+        `Cambio: ${money(change)}`
+
+    );
+
+}
+
+
+/* =====================================================
+   NUMERO DE PEDIDO
+===================================================== */
+
+function getNextOrderNumber(){
+
+    if(orders.length === 0)
+        return 1;
+
+
+    return Math.max(
+
+        ...orders.map(
+
+            o =>
+
+                Number(o.id)
+
+        )
+
+    ) + 1;
+
+}
+
+
+/* =====================================================
+   PEDIDOS
+===================================================== */
+
+function renderOrders(){
+
+    const container =
+
+        document.getElementById(
+            "orders"
+        );
+
+
+    if(!container)
+        return;
+
+
+    if(orders.length === 0){
+
+        container.innerHTML =
+
+            `<p>
+
+                No existen pedidos.
+
+            </p>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+
+        <table class="orders-table">
+
+
+            <thead>
+
+
+                <tr>
+
+
+                    <th>
+                        #
+                    </th>
+
+
+                    <th>
+                        Cliente
+                    </th>
+
+
+                    <th>
+                        Tipo
+                    </th>
+
+
+                    <th>
+                        Total
+                    </th>
+
+
+                    <th>
+                        Estado
+                    </th>
+
+
+                    <th>
+                        Acción
+                    </th>
+
+
+                </tr>
+
+
+            </thead>
+
+
+            <tbody>
+
+
+                ${orders
+
+                    .slice()
+
+                    .reverse()
+
+                    .map(
+
+                        order=>`
+
+
+                        <tr>
+
+
+                            <td>
+
+                                #${order.id}
+
+                            </td>
+
+
+                            <td>
+
+                                ${order.customer}
+
+                            </td>
+
+
+                            <td>
+
+                                ${order.type}
+
+                            </td>
+
+
+                            <td>
+
+                                ${money(
+                                    order.total
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+
+                                <span
+
+                                    class=
+                                    "status status-${order.status
+                                        .toLowerCase()
+                                        .replace(
+                                            " ",
+                                            ""
+                                        )}">
+
+
+                                    ${order.status}
+
+
+                                </span>
+
+
+                            </td>
+
+
+                            <td>
+
+
+                                <button
+
+                                    class="secondary"
+
+                                    style=
+                                    "padding:7px;"
+
+                                    onclick=
+                                    "viewOrder(${order.id})">
+
+
+                                    Ver
+
+
+                                </button>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                    `
+
+                    ).join("")}
+
+
+            </tbody>
+
+
+        </table>
+
+    `;
+
+}
+
+
+/* =====================================================
+   VER PEDIDO
+===================================================== */
+
+function viewOrder(id){
+
+    const order =
+
+        orders.find(
+
+            o =>
+
+                o.id === id
+
+        );
+
+
+    if(!order)
+        return;
+
+
+    document.getElementById(
+        "orderDetails"
+    ).innerHTML = `
+
+
+        <h3>
+
+            Pedido #${order.id}
+
+        </h3>
+
+
+        <br>
+
+
+        <p>
+
+            <strong>
+                Cliente:
+            </strong>
+
+            ${order.customer}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Tipo:
+            </strong>
+
+            ${order.type}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Fecha:
+            </strong>
+
+            ${order.date}
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Nota:
+            </strong>
+
+            ${order.note || "Sin nota"}
+
+        </p>
+
+
+        <br>
+
+
+        <h3>
+
+            Productos
+
+        </h3>
+
+
+        <br>
+
+
+        ${order.items.map(
+
+            item=>`
+
+
+            <div class="cart-item">
+
+
+                <strong>
+
+                    ${item.name}
+
+                </strong>
+
+
+                <br>
+
+
+                <small>
+
+                    ${item.modifier}
+
+                </small>
+
+
+                <span
+                    style="float:right;">
+
+                    ${money(
+                        item.price
+                    )}
+
+                </span>
+
+
+            </div>
+
+
+        `).join("")}
+
+
+        <br>
+
+
+        <h2>
+
+            Total:
+
+            ${money(
+                order.total
+            )}
+
+        </h2>
+
+
+        <br>
+
+
+        <div class="form-group">
+
+
+            <label>
+
+                Estado
+
+            </label>
+
+
+            <select
+                id="orderStatus">
+
+
+                <option
+
+                    ${order.status ===
+                      "Pendiente"
+                      ?
+                      "selected"
+                      :
+                      ""}>
+
+                    Pendiente
+
+                </option>
+
+
+                <option
+
+                    ${order.status ===
+                      "Preparando"
+                      ?
+                      "selected"
+                      :
+                      ""}>
+
+                    Preparando
+
+                </option>
+
+
+                <option
+
+                    ${order.status ===
+                      "Listo"
+                      ?
+                      "selected"
+                      :
+                      ""}>
+
+                    Listo
+
+                </option>
+
+
+                <option
+
+                    ${order.status ===
+                      "Entregado"
+                      ?
+                      "selected"
+                      :
+                      ""}>
+
+                    Entregado
+
+                </option>
+
+
+            </select>
+
+
+        </div>
+
+
+        <button
+
+            class="primary"
+
+            onclick=
+            "updateOrderStatus(${order.id})">
+
+
+            Guardar estado
+
+
+        </button>
+
+
+    `;
+
+
+    document.getElementById(
+        "orderModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+function closeModal(){
+
+    document.getElementById(
+        "orderModal"
+    ).classList.remove(
+        "active"
+    );
+
+}
+
+
+function updateOrderStatus(id){
+
+    const order =
+
+        orders.find(
+
+            o =>
+
+                o.id === id
+
+        );
+
+
+    if(!order)
+        return;
+
+
+    order.status =
+
+        document.getElementById(
+            "orderStatus"
+        ).value;
+
+
+    saveAll();
+
+
+    renderOrders();
+
+
+    closeModal();
+
+
+    toast(
+        "Estado actualizado."
+    );
+
+}
+
+
+/* =====================================================
+   SIMULACIÓN DE PERIFÉRICOS
+===================================================== */
+
+function simulatePrinter(){
+
+    console.log(
+
+        "🖨️ IMPRESORA:",
+
+        "Documento enviado a impresión."
+
+    );
+
+}
+
+
+function simulateCashDrawer(){
+
+    console.log(
+
+        "💵 CAJA REGISTRADORA:",
+
+        "Pulso de apertura enviado."
+
+    );
+
+}
+
+
+/* =====================================================
+   GENERAR PDF
+===================================================== */
+
+function generatePDF(order){
+
+    if(
+
+        !window.jspdf ||
+
+        !window.jspdf.jsPDF
+
+    ){
+
+        toast(
+
+            "No se pudo cargar el generador PDF."
+
+        );
+
+        return;
+
+    }
+
+
+    const {
+
+        jsPDF
+
+    } =
+
+        window.jspdf;
+
+
+    const doc =
+
+        new jsPDF({
+
+            unit:"mm",
+
+            format:
+                [
+                    80,
+                    180
+                ]
+
+        });
+
+
+    let y = 10;
+
+
+    doc.setFontSize(13);
+
+
+    doc.text(
+
+        BUSINESS_NAME,
+
+        40,
+
+        y,
+
+        {
+
+            align:"center"
+
+        }
+
+    );
+
+
+    y += 7;
+
+
+    doc.setFontSize(8);
+
+
+    doc.text(
+
+        "NOTA DE VENTA",
+
+        40,
+
+        y,
+
+        {
+
+            align:"center"
+
+        }
+
+    );
+
+
+    y += 7;
+
+
+    doc.line(
+
+        5,
+
+        y,
+
+        75,
+
+        y
+
+    );
+
+
+    y += 6;
+
+
+    doc.text(
+
+        "Pedido: #" +
+        order.id,
+
+        5,
+
+        y
+
+    );
+
+
+    y += 5;
+
+
+    doc.text(
+
+        order.date,
+
+        5,
+
+        y
+
+    );
+
+
+    y += 5;
+
+
+    doc.text(
+
+        "Cliente: " +
+        order.customer,
+
+        5,
+
+        y
+
+    );
+
+
+    y += 7;
+
+
+    order.items.forEach(
+
+        item=>{
+
+
+            doc.text(
+
+                item.name,
+
+                5,
+
+                y
+
+            );
+
+
+            y += 4;
+
+
+            doc.text(
+
+                "  " +
+                item.modifier,
+
+                5,
+
+                y
+
+            );
+
+
+            doc.text(
+
+                money(
+                    item.price
+                ),
+
+                75,
+
+                y,
+
+                {
+
+                    align:"right"
+
+                }
+
+            );
+
+
+            y += 6;
+
+
+        }
+
+    );
+
+
+    doc.line(
+
+        5,
+
+        y,
+
+        75,
+
+        y
+
+    );
+
+
+    y += 7;
+
+
+    doc.setFontSize(10);
+
+
+    doc.text(
+
+        "TOTAL:",
+
+        5,
+
+        y
+
+    );
+
+
+    doc.text(
+
+        money(
+            order.total
+        ),
+
+        75,
+
+        y,
+
+        {
+
+            align:"right"
+
+        }
+
+    );
+
+
+    y += 6;
+
+
+    doc.setFontSize(8);
+
+
+    doc.text(
+
+        "Pago: " +
+
+        money(
+            order.payment
+        ),
+
+        5,
+
+        y
+
+    );
+
+
+    y += 5;
+
+
+    doc.text(
+
+        "Cambio: " +
+
+        money(
+            order.change
+        ),
+
+        5,
+
+        y
+
+    );
+
+
+    y += 10;
+
+
+    doc.setFontSize(10);
+
+
+    doc.text(
+
+        "Chingue a su madre",
+
+        40,
+
+        y,
+
+        {
+
+            align:"center"
+
+        }
+
+    );
+
+
+    doc.save(
+
+        "ticket-" +
+
+        order.id +
+
+        ".pdf"
+
+    );
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+showDashboard();
+
+
+</script>
+
+</body>
+</html>
+```
